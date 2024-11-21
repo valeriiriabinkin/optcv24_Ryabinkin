@@ -68,7 +68,7 @@ Adam совмещает в себе идеи AdaGrad и RMSProb. Он адапт
 
 В рамках обучения на Cifar10 сложно сказать, какой алгоритм работает лучше, они оба хорошо сходятся.
 
-https://github.com/valeriiriabinkin/optcv24_Ryabinkin/blob/master/loss_plot_adam.png
-https://github.com/valeriiriabinkin/optcv24_Ryabinkin/blob/master/loss_plot_sgd.png
+![alt text](https://github.com/valeriiriabinkin/optcv24_Ryabinkin/blob/master/loss_plot_adam.png)
+![alt text](https://github.com/valeriiriabinkin/optcv24_Ryabinkin/blob/master/loss_plot_sgd.png)
 
 Однако если сравнивать в целом по задачам глубокого обучения, то Adam используется почти всегда, если у вас одна GPU, он быстро сходится и способен стабильно работать и на большем объеме данных. Если же мы используем несколько GPU, то тут чаще может использоваться SGD, так как он обновляет параметры модели после вычисления градиентов на каждом батче. Adam, использует дополнительные состояния для каждого параметра (моменты градиента), что увеличивает накладные расходы на синхронизацию и память.
