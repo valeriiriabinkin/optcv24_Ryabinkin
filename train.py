@@ -50,7 +50,8 @@ def train(optimizer_name='SGD'):
                                             download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                               shuffle=True, num_workers=2)
-
+    
+    # show_images(trainloader)
     net = build_model().to(device)
 
     criterion = nn.CrossEntropyLoss()
@@ -65,10 +66,11 @@ def train(optimizer_name='SGD'):
     # Логирование потерь
     losses_per_epoch = []
 
-    for epoch in range(10):  # Number of epochs
+    for epoch in range(10):  # loop over the dataset multiple times
         running_loss = 0.0
         epoch_loss = 0.0
         for i, data in enumerate(trainloader, 0):
+            # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
             inputs, labels = inputs.to(device), labels.to(device)
 
@@ -85,8 +87,8 @@ def train(optimizer_name='SGD'):
             running_loss += loss.item()
             epoch_loss += loss.item()
 
-            # Print running loss every 200 mini-batches
-            if i % 200 == 199:
+            # Print statistics
+            if i % 200 == 199:    # print every 200 mini-batches
                 print(f'Epoch [{epoch + 1}], Batch [{i + 1}] Loss: {running_loss / 200:.3f}')
                 running_loss = 0.0
 
@@ -98,8 +100,10 @@ def train(optimizer_name='SGD'):
     # Построение графика
     plot_loss(losses_per_epoch, optimizer_name)
 
-    # Сохранение модели
+
+    print('Finished Training')
     os.makedirs('models', exist_ok=True)
+    
     torch.save(net.state_dict(), f'models/{optimizer_name.lower()}_model.pth')
 
 
