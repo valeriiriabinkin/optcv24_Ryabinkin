@@ -15,12 +15,15 @@
 Я модифицировал исходный файл train. 
 
 Добавил возможность обучать на gpu
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 Добавил модель на GPU
+
 net = build_model().to(device)
 
 И добавил оба алгоритма оптимизации
+
     if optimizer_name == 'SGD':
         optimizer = torch.optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
     elif optimizer_name == 'Adam':
@@ -29,16 +32,20 @@ net = build_model().to(device)
         raise ValueError("Unsupported optimizer. Choose 'SGD' or 'Adam'.")
 
 Делаяю логирование потерь
+
 losses_per_epoch = []
 
 Дальше в цикле обучения я добавляю явно данные в GPU
+
 inputs, labels = inputs.to(device), labels.to(device)
 
 Дальше считаю среднюю потерю за эпоху
+
 avg_epoch_loss = epoch_loss / len(trainloader)
 losses_per_epoch.append(avg_epoch_loss)
 
 Отрисовываю график
+
 plot_loss(losses_per_epoch, optimizer_name)
 def plot_loss(losses, optimizer_name):
     plt.figure(figsize=(10, 6))
@@ -54,6 +61,7 @@ def plot_loss(losses, optimizer_name):
 
 
 Запускаю функцию train два раза подряд с двумя алгоритмами оптимизации
+
 if __name__ == '__main__':
     # Train with SGD
     train(optimizer_name='SGD')
