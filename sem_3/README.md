@@ -19,4 +19,4 @@ layers.append(nn.Linear(linear_input_features, CLASSES))
 Вместо разворачивания изображения (data.view(data.size(0), -1)), теперь данные остаются в формате для Conv2d (размер 28x28)
 
 Результаты:
-![alt text][image](https://github.com/user-attachments/assets/04e7678a-9aca-40a4-82b4-997a7a6fb6b7)
+![alt text](https://github.com/user-attachments/assets/04e7678a-9aca-40a4-82b4-997a7a6fb6b7)
